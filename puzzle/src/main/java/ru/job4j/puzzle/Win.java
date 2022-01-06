@@ -4,6 +4,7 @@ public class Win {
 
     public static boolean check(int[][] board) {
         return checkRow(board) || checkCell(board);
+
     }
 
     public static boolean checkRow(int[][] board) {
