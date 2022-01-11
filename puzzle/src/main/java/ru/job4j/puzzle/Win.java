@@ -5,12 +5,10 @@ public class Win {
     public static boolean check(int[][] board) {
         boolean rsl = false;
 
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                if (board[j][i] == 1 && (checkRow(board, j) || (checkCell(board, j)))) {
+            for (int i = 0; i < board.length; i++) {
+                if (board[i][i] == 1 && (checkRow(board, i) || (checkCell(board, i)))) {
                     rsl = true;
                     break;
-                }
             }
         }
         return rsl;
