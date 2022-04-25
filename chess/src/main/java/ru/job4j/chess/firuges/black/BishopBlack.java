@@ -32,7 +32,7 @@ public class BishopBlack implements Figure {
         for (int index = 0; index < size; index++) {
                 x += xD;
                 y += yD;
-            steps[index] = Cell.findBy(xD, yD);
+            steps[index] = Cell.findBy(x, y);
         }
         return steps;
     }

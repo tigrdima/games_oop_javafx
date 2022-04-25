@@ -1,30 +1,38 @@
 package ru.job4j.chess;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.black.BishopBlack;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 public class LogicTest {
 
-    @Ignore
-    @Test
-    public void move()
-            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
-
+    @Test(expected = FigureNotFoundException.class)
+    public void figureNotFound() throws FigureNotFoundException, OccupiedCellException {
         Logic logic = new Logic();
-
-        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        logic.add(bishopBlack);
-        Cell source = Cell.C1;
-        Cell dest = Cell.H6;
-
+        Cell source = Cell.C8;
+        Cell dest = Cell.A6;
         logic.move(source, dest);
+    }
 
-        boolean rsl = bishopBlack.position().equals(dest);
-        assertThat(rsl, is(true));
+    @Test(expected = OccupiedCellException.class)
+    public void occupiedCell() throws FigureNotFoundException, OccupiedCellException {
+        Logic logic = new Logic();
+        logic.clean();
+        logic.add(new BishopBlack(Cell.C8));
+        logic.add(new BishopBlack(Cell.A6));
+
+        Cell source = Cell.C8;
+        Cell dest = Cell.A6;
+        logic.move(source, dest);
+    }
+
+    @Test(expected = ImpossibleMoveException.class)
+    public void impossibleMove() throws FigureNotFoundException, OccupiedCellException {
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C8));
+
+        Cell source = Cell.C8;
+        Cell dest = Cell.A7;
+        logic.move(source, dest);
     }
 }
